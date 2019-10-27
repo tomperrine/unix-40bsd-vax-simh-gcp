@@ -1,7 +1,7 @@
-# vax-in-gcp
+# unix-40bsd-vax-simh-gcp (renamed from vax-in-gcp)
 tooling to automagically create a running BSD system on a VaX-11 using simh in GCP
 
-This software creates a full functional 4 BSD) system running on
+This software creates a full functional 4.0 BSD) system running on
 an emulated VAX (using SIMH) in the Google Cloud (GCP).
 
 This uses several scripts and configuration files:
