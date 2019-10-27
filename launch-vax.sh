@@ -7,9 +7,25 @@
 
 . ./instance-name.sh
 
-gcloud compute scp update-os-build-simh.sh *.init boot 4.0bsd.tape  ${CLOUD_USERNAME}@${INSTANCENAME}: --project ${PROJ} --zone ${CLOUDSDK_COMPUTE_ZONE}
+# does the instance we're going to create already exist?
+# Note - the command doesn't return a usable exit code so we have to test separately
+tt=`gcloud compute instances list --filter="name=($INSTANCENAME)" | grep $INSTANCENAME | wc -l `
+if [ $tt != '0' ] ; then
+    echo "instance $INSTANCENAME already exists... exiting"
+    exit 1
+fi
 
-exit
+echo "launching instance, patching (can take up to 10 minutes on a tiny)..."
+../create-simple-google-instance/create-instance.sh
+
+# put the main install script on the host and run it
+# dont return here until the OS is running, all packages have been installed
+gcloud compute scp update-os-build-simh.sh *.init boot 4.0bsd.tape  ${CLOUD_USERNAME}@${INSTANCENAME}: --project ${PROJ} --zone ${CLOUDSDK_COMPUTE_ZONE}
+gcloud compute ssh ${CLOUD_USERNAME}@${INSTANCENAME} --project ${PROJ} --zone ${CLOUDSDK_COMPUTE_ZONE} -- chmod +x update-os-build-simh.sh
+
+gcloud compute ssh ${CLOUD_USERNAME}@${INSTANCENAME} --project ${PROJ} --zone ${CLOUDSDK_COMPUTE_ZONE} -- './update-os-build-simh.sh'
+
+
 
 
 # first lets get the distro files we need
