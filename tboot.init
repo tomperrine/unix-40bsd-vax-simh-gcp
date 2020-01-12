@@ -1,4 +1,3 @@
-expect 'Overwrite last track?' send 'y\r'; continue
 set tto 7b
 set rq dis
 set lpt dis
@@ -13,6 +12,12 @@ set ts dis
 set tq dis
 set dz lines=8
 set rp0 rp06
+:
+: deal with some weirdness here
+: we should be able to use the following EXPECT line to
+: answer the Overwrite question, but there's something wrong
+: so we have to echo a 'y' into this script instead - see how this script is invoked
+: THIS DOESN'T WORK - expect 'Overwrite last track? [N]' send 'y\r'; continue
 at rp0 rp06.disk
 set tu0 te16
 at tu0 4.0bsd.tape
@@ -36,7 +41,22 @@ expect '=' send 'restor\r'; continue
 expect 'Tape?' send 'ht(0,1)\r'; continue
 expect 'Disk?' send 'hp(0,0)\r'; continue
 expect 'Last chance before scribbling on disk' send '\r'; continue
-::expect '=' send 'boot\r'; continue
-::expect ':' send 'hp(0,0)vmunix\r'; continue
+expect '=' send 'boot\r'; continue
+expect ':' send 'hp(0,0)vmunix\r'; continue
 run 50000
+: at this point we're looking at a # prompt
+expect '#' send 'fsck /dev/rrp0a\r'; continue
+expect '#' send '/etc/mkfs /dev/rrp0g 145673\r'; continue
+expect '#' send '/etc/mount /dev/rp0g /usr\r'; continue
+expect '#' send 'cd /usr\r'; continue
+expect '#' send 'cp /dev/rmt12 /dev/null\r'; continue
+expect '#' send 'cp /dev/rmt12 /dev/null\r'; continue
+expect '#' send 'tar xpb 20\r'; continue
+expect '#' send 'dd if=/usr/mdec/uboot of=/dev/rrp0a bs=1b count=1\r'; continue
+expect '#' send 'cd /\r'; continue
+expect '#' send 'chmod 755  /  /usr\r'; continue
+expect '#' send '/etc/umount /dev/rp0g\r'; continue
+expect '#' send 'sync\r'; continue
+expect '#' send 'sync\r'; continue
+expect '#' send 'sync\r'; continue
 run 0

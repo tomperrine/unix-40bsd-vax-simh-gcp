@@ -47,30 +47,7 @@ cd simh-master
 # time for another beer, maybe two
 make vax780
 
-# emulator is in BIN/pdp11
+echo "SIMH build complete, emulator is in BIN/vax780"
 
 date
-
-cd
-
-# at this point, we have an emulator and a BSD tape
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-###############################
-
-
-
-
 
