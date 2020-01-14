@@ -32,22 +32,19 @@ echo "launching instance, patching (can take up to 10 minutes on a tiny)..."
 
 # put the main install script on the host and run it
 # dont return here until the OS is running, all packages have been installed
-gcloud compute scp update-os-build-simh.sh *.init starunix/4.0bsd/boot starunix/4.0bsd/4.0bsd.tape  ${CLOUD_USERNAME}@${INSTANCENAME}: --project ${PROJ} --zone ${CLOUDSDK_COMPUTE_ZONE}
-gcloud compute ssh ${CLOUD_USERNAME}@${INSTANCENAME} --project ${PROJ} --zone ${CLOUDSDK_COMPUTE_ZONE} -- chmod +x update-os-build-simh.sh
+echo "copying files..."
+gcloud compute scp update-os-build-simh.sh vax-40bsd-first-boot.sh *.init starunix/4.0bsd/boot starunix/4.0bsd/4.0bsd.tape  ${CLOUD_USERNAME}@${INSTANCENAME}: --project ${PROJ} --zone ${CLOUDSDK_COMPUTE_ZONE}
 
+echo "setting +x modes"
+gcloud compute ssh ${CLOUD_USERNAME}@${INSTANCENAME} --project ${PROJ} --zone ${CLOUDSDK_COMPUTE_ZONE} -- chmod +x update-os-build-simh.sh vax-40bsd-first-boot.sh
+
+echo "running update-os-build-simh..."
 gcloud compute ssh ${CLOUD_USERNAME}@${INSTANCENAME} --project ${PROJ} --zone ${CLOUDSDK_COMPUTE_ZONE} -- './update-os-build-simh.sh'
 
+echo "running vax-40bsd0first-boot..."
+gcloud compute ssh ${CLOUD_USERNAME}@${INSTANCENAME} --project ${PROJ} --zone ${CLOUDSDK_COMPUTE_ZONE} -- './vax-40bsd-first-boot.sh
 
-
-exit
-
-
-echo 'OS and SIMH installed. Log into the instance and run the following commands:
-$ simh-master/BIN/pdp11 tboot.ini 
-$ simh-master/BIN/pdp11 buildunix.ini 
-$ simh-master/BIN/pdp11 normalboot.ini 
-NOTE: the first two scripts require that you manually halt ^E the simulation'
-
-
+echo 'OS and SIMH installed. 4.0BSD installed into emulated VAX780.:
+echo "Log into the Ubunto instance and use \$simh-master/BIN/vax780 dboot.init to start the emulator, log in as 'root'"
 
 exit
