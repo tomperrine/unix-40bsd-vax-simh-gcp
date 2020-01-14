@@ -22,42 +22,41 @@ This uses several scripts and configuration files:
 For normal operation, log into the Ubuntu instance and run:
 $simh-master/BIN/vax780 dboot.init and you will see
 
-----
-$ ./simh-master/BIN/vax780 dboot.init 
-VAX 11/780 simulator V4.0-0 Current        git commit id: 027c1de4
-Boot
-: hp(0,0)vmunix
-87844+15464+130300 start 0x530
-VM/UNIX (Berkeley Version 4.1) 11/10/80 
-real mem  = 8323072
-avail mem = 7860224
-Automatic reboot in progress...
-Tue Jan 13 18:57:49 PST 1976
-/dev/rp0a: 286 files 1896 blocks 5727 free
-/dev/rrp0g: 6041 files 33710 blocks 107868 free
-Tue Jan 13 18:57:53 PST 1976
-Mounted /usr on /dev/rp0g  
-preserving editor files
-clearing /tmp
-starting daemons: update cron accounting network mail.
-Tue Jan 13 18:57:53 PST 1976
-Virtual VAX/UNIX (Ernie Co-vax)
-login: 
-----
+
+  $ ./simh-master/BIN/vax780 dboot.init 
+  VAX 11/780 simulator V4.0-0 Current        git commit id: 027c1de4
+  Boot
+  : hp(0,0)vmunix
+  87844+15464+130300 start 0x530
+  VM/UNIX (Berkeley Version 4.1) 11/10/80 
+  real mem  = 8323072
+  avail mem = 7860224
+  Automatic reboot in progress...
+  Tue Jan 13 18:57:49 PST 1976
+  /dev/rp0a: 286 files 1896 blocks 5727 free
+  /dev/rrp0g: 6041 files 33710 blocks 107868 free
+  Tue Jan 13 18:57:53 PST 1976
+  Mounted /usr on /dev/rp0g  
+  preserving editor files
+  clearing /tmp
+  starting daemons: update cron accounting network mail.
+  Tue Jan 13 18:57:53 PST 1976
+  Virtual VAX/UNIX (Ernie Co-vax)
+  login: 
 
 
-References
+REFERENCES
 
-https://sourceforge.net/projects/bsd42/files/Install%20tapes/4.0%20BSD/
-http://gunkies.org/wiki/32v
+* https://sourceforge.net/projects/bsd42/files/Install%20tapes/4.0%20BSD/
+* http://gunkies.org/wiki/32v
 
-http://gunkies.org/wiki/Installing_32v_on_SIMH
-https://www.in-ulm.de/~mascheck/various/ancient/
-http://a.papnet.eu/UNIX/
+* http://gunkies.org/wiki/Installing_32v_on_SIMH
+* https://www.in-ulm.de/~mascheck/various/ancient/
+* http://a.papnet.eu/UNIX/
 
 
-http://zazie.tom-yam.or.jp/starunix/
-http://zazie.tom-yam.or.jp/starunix/4.0bsd/4.0bsd.html
+* http://zazie.tom-yam.or.jp/starunix/
+* http://zazie.tom-yam.or.jp/starunix/4.0bsd/4.0bsd.html
 
 
 http://gunkies.org/wiki/4.2_BSD#How_do_I_get_this_to_run.3F.21
