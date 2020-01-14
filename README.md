@@ -22,7 +22,9 @@ This uses several scripts and configuration files:
 For normal operation, log into the Ubuntu instance and run:
 $simh-master/BIN/vax780 dboot.init and you will see
 
-----
+
+
+~~~~
   $ ./simh-master/BIN/vax780 dboot.init 
   VAX 11/780 simulator V4.0-0 Current        git commit id: 027c1de4
   Boot
@@ -43,7 +45,8 @@ $simh-master/BIN/vax780 dboot.init and you will see
   Tue Jan 13 18:57:53 PST 1976
   Virtual VAX/UNIX (Ernie Co-vax)
   login: 
-----
+
+~~~~
 
 REFERENCES
 
